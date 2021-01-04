@@ -4,7 +4,7 @@ public class PigLatin {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         while(s.hasNextLine()) {
-            System.out.println(pigLatin(s.nextLine()));
+            System.out.println(pigLatinBest(s.nextLine()));
         }
         s.close();
     }
@@ -29,5 +29,23 @@ public class PigLatin {
             return lower + "hay";
         }
         return lower.substring(1) + lower.charAt(0) + "ay";
+    }
+
+    public static String pigLatinBest(String s){
+        String lower = s.toLowerCase();
+        if(
+            !(lower.charAt(0) >= 'A' && lower.charAt(0) <= 'Z') && 
+            !(lower.charAt(0) >= 'a' && lower.charAt(0) <= 'z')
+        ) {
+            return lower;
+        }
+        if(
+            !(lower.charAt(s.length() - 1) >= 'A' && lower.charAt(s.length() - 1) <= 'Z') && 
+            !(lower.charAt(s.length() - 1) >= 'a' && lower.charAt(s.length() - 1) <= 'z') && 
+            !(lower.charAt(s.length() - 1) >= '0' && lower.charAt(s.length() - 1) <= '9')
+        ) {
+            return pigLatin(s.substring(0, s.length() - 1)) + lower.charAt(s.length() - 1);
+        }
+        return pigLatin(s);
     }
 }
