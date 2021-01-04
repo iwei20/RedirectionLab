@@ -19,7 +19,10 @@ public class PigLatin {
         char[] vowels = new char[]{'a','e','i','o','u'};
         if(Arrays.binarySearch(vowels, lower.charAt(0)) >= 0) {
             return lower + "hay";
-        } 
+        }
+        if(s.length() <= 1) {
+            return lower + "ay";
+        }
         return lower.substring(1) + lower.charAt(0) + "ay";
     }
     
@@ -27,11 +30,14 @@ public class PigLatin {
         String lower = s.toLowerCase();
         String[] digraphs = new String[]{"bl", "br", "ch", "ck", "cl", "cr", "dr", "fl", "fr", "gh", "gl", "gr", "ng", "ph", "pl", "pr", "qu", "sc", "sh", "sk", "sl", "sm", "sn", "sp", "st", "sw", "th", "tr", "tw", "wh", "wr"};
         char[] vowels = new char[]{'a','e','i','o','u'};
-        if(Arrays.binarySearch(digraphs, lower.substring(0, 2)) >= 0) {
-            return lower.substring(2) + lower.substring(0, 2) + "ay";
-        }
         if(Arrays.binarySearch(vowels, lower.charAt(0)) >= 0) {
             return lower + "hay";
+        }
+        if(s.length() >= 2 && Arrays.binarySearch(digraphs, lower.substring(0, 2)) >= 0) {
+            return lower.substring(2) + lower.substring(0, 2) + "ay";
+        }
+        if(s.length() <= 1) {
+            return lower + "ay";
         }
         return lower.substring(1) + lower.charAt(0) + "ay";
     }
